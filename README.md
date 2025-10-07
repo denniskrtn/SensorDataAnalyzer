@@ -43,7 +43,7 @@ git clone https://github.com/denniskrtn/SensorDataAnalyzer.git
 - Öffnen Sie Visual Studio -> File -> Open -> Project/Solution
 - Wähle SensorDataAnalyzer.sln im geklonten Ordner aus.
 
-### Kompilieren und Ausführen
+### 3. Kompilieren und Ausführen
 - Build -> Start
 - Das Programm zeigt die Temperaturmesswerte in der Konsole an.
 
