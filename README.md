@@ -33,10 +33,19 @@ Sensor Data Analyzer/
 ---
 
 ## Nutzung
-- Projekt in Visual Studio erstellen, Dateien einfügen und ausführen.
 
-Hinweis: Antivirus-Programme können selbstkompilierte EXE-Dateien fälschlicherweise melden.
-Am besten den Quellcode nutzen oder eine Ausnahme hinzufügen.
+### 1. Repository klonen
+Klonen Sie das Projekt von GitHub:
+```bash
+git clone https://github.com/denniskrtn/SensorDataAnalyzer.git
+```
+### 2. Projekt öffnen
+- Öffnen Sie Visual Studio -> File -> Open -> Project/Solution
+- Wähle SensorDataAnalyzer.sln im geklonten Ordner aus.
+
+### Kompilieren und Ausführen
+- Build -> Start
+- Das Programm zeigt die Temperaturmesswerte in der Konsole an.
 
 ---
 
