@@ -1,0 +1,34 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.vcxproj.user
+*.VC.db
+*.VC.opendb
+
+# Build-Ordner
+Debug/
+Release/
+x64/
+x86/
+build/
+
+# Datenordner (Messwerte)
+data/
+
+# C++ temporäre Dateien
+*.obj
+*.o
+*.exe
+*.pch
+*.idb
+*.pdb
+*.ipch
+
+# Log-Dateien
+*.log
+
+# Sonstige temporäre Dateien
+*.tmp
+*.bak
+*.swp

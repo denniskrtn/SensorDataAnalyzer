@@ -1,10 +1,14 @@
 #pragma once
 #include <string>
+#include <random>
 
 class Sensor {
+public:
+    explicit Sensor(std::string name);
+    double getReading();
+
 private:
     std::string name;
-public:
-    Sensor(std::string name);
-    double getReading();
+    std::mt19937 gen;
+    std::uniform_real_distribution<double> dist;
 };

@@ -1,23 +1,47 @@
 #include "Analyzer.h"
-#include <iostream>
 #include <fstream>
+#include <iostream>
 #include <numeric>
 #include <algorithm>
+#include <iomanip>
+#include <cmath>
 
 void Analyzer::addReading(double value) {
+    if (std::isnan(value)) {
+        std::cerr << "[Warnung] Ungültiger Messwert (NaN) ignoriert.\n";
+        return;
+    }
     readings.push_back(value);
 }
 
-void Analyzer::saveToFile(const std::string& path) {
+bool Analyzer::saveToFile(const std::string& path) const {
     std::ofstream file(path);
-    if (!file.is_open()) {
-        std::cerr << "Fehler: Datei konnte nicht geöffnet werden: " << path << "\n";
-        return;
+    if (!file) {
+        std::cerr << "[Fehler] Datei konnte nicht geöffnet werden: " << path << "\n";
+        return false;
     }
-    for (double val : readings) {
-        file << val << "\n";
+
+    file << std::fixed << std::setprecision(2);
+    for (auto val : readings) {
+        if (!(file << val << "\n")) {
+            std::cerr << "[Fehler] Fehler beim Schreiben in Datei: " << path << "\n";
+            return false;
+        }
     }
-    file.close();
+
+    return true;
+}
+
+std::optional<Stats> Analyzer::getStats() const {
+    if (readings.empty()) return std::nullopt;
+
+    double sum = std::accumulate(readings.cbegin(), readings.cend(), 0.0);
+    return Stats{
+        readings.size(),
+        sum / readings.size(),
+        *std::min_element(readings.cbegin(), readings.cend()),
+        *std::max_element(readings.cbegin(), readings.cend())
+    };
 }
 
 void Analyzer::printStats() const {
@@ -26,14 +50,15 @@ void Analyzer::printStats() const {
         return;
     }
 
-    double sum = std::accumulate(readings.begin(), readings.end(), 0.0);
-    double avg = sum / readings.size();
-    double maxVal = *std::max_element(readings.begin(), readings.end());
-    double minVal = *std::min_element(readings.begin(), readings.end());
+    auto statsOpt = getStats();
+    if (!statsOpt) return;
 
-    std::cout << "Statistik:\n";
-    std::cout << " - Anzahl Werte: " << readings.size() << "\n";
-    std::cout << " - Durchschnitt: " << avg << "\n";
-    std::cout << " - Minimum: " << minVal << "\n";
-    std::cout << " - Maximum: " << maxVal << "\n";
+    const Stats& stats = *statsOpt;
+
+    std::cout << "\n=== Statistik ===\n";
+    std::cout << "Anzahl Werte : " << stats.count << "\n";
+    std::cout << "Durchschnitt : " << stats.average << " C\n";
+    std::cout << "Minimum      : " << stats.min << " C\n";
+    std::cout << "Maximum      : " << stats.max << " C\n";
+    std::cout << "====================\n";
 }

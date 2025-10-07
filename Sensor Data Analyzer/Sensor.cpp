@@ -1,11 +1,12 @@
 #include "Sensor.h"
-#include <cstdlib>
-#include <ctime>
 
-Sensor::Sensor(std::string name) : name(name) {
-    srand(static_cast<unsigned>(time(nullptr)));
+Sensor::Sensor(std::string name)
+    : name(std::move(name)),
+    gen(std::random_device{}()),
+    dist(-10.0, 40.0)
+{
 }
 
 double Sensor::getReading() {
-    return (rand() % 1000) / 10.0; // z.B. 0.0 bis 100.0
+    return dist(gen);
 }
