@@ -38,6 +38,8 @@ Sensor Data Analyzer/
 Hinweis: Antivirus-Programme können selbstkompilierte EXE-Dateien fälschlicherweise melden.
 Am besten den Quellcode nutzen oder eine Ausnahme hinzufügen.
 
+---
+
 ## Beispiel
 ```text
 === Temperaturmessung gestartet ===
@@ -72,6 +74,8 @@ Maximum      : 22.89 C
 - Zufällige Temperatursimulation zwischen -10 °C und 40 °C
 - Berechnung von Anzahl, Durchschnitt, Minimum und Maximum.
 - Sicheres Schreiben in Datei mit Fehlerprüfung.
+
+---
 
 ## Erweiterungen
 - CSV-Ausgabe für einfache Weiterverarbeitung.
